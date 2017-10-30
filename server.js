@@ -44,7 +44,7 @@ app.use((req,res,next) => {
   next();
 });
 
-// this got commented so that the application runs completely 
+// this got commented so that the application runs completely
 // app.use((req, res, next) => {
 //   res.render('maintenance.hbs', {
 //     pageTitle: 'Maintenance page',
@@ -94,6 +94,12 @@ app.get('/about', (req, res) => {
   // res.send('About page');
   res.render('about.hbs', {
     pageTitle: 'About page'
+  });
+});
+
+app.get('/projects', (req,res) => {
+  res.render('projects.hbs', {
+    pageTitle: 'Projects'
   });
 });
 
