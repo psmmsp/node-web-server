@@ -14,6 +14,9 @@ const hbs = require('hbs');
 
 const fs = require('fs');
 
+// this was added for host the app on heroku
+const port = process.env.PORT || 3000;
+
 var app = express();
 // below is how we use partial, this when we have repeating html/hbs then we can make them as files and use them to render in the other html / hbs page, This is inside partials folder. Fox exapmple the footer and header is a partials
 
@@ -41,14 +44,16 @@ app.use((req,res,next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  res.render('maintenance.hbs', {
-    pageTitle: 'Maintenance page',
-    welcomemessage: 'Checking! Will be back soon'
-  });
-});
+// this got commented so that the application runs completely 
+// app.use((req, res, next) => {
+//   res.render('maintenance.hbs', {
+//     pageTitle: 'Maintenance page',
+//     welcomemessage: 'Checking! Will be back soon'
+//   });
+//   next();
+// });
 
-//** STATIC MIDDLEWARE: this becasue we will not to show the maintenance page when we visit http://localhost:3000/help.html 
+//** STATIC MIDDLEWARE: this becasue we will not to show the maintenance page when we visit http://localhost:3000/help.html
  app.use(express.static(__dirname + '/public'));
 
 // this is how we create a helper to get the Date using hbs
@@ -88,7 +93,7 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
   // res.send('About page');
   res.render('about.hbs', {
-    pageTitle: 'Abount page'
+    pageTitle: 'About page'
   });
 });
 
@@ -98,6 +103,6 @@ app.get('/bad', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log('port running');
+app.listen(port, () => {
+  console.log(`port running at ${port}`);
 });
